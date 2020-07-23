@@ -1,5 +1,6 @@
 <?php
 
+use App\Answer;
 use Illuminate\Http\Request;
 
 /*
@@ -13,9 +14,6 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
 //Respuestas
 Route::get('answers', 'AnswerController@index');
 Route::get('answers/{id}', 'AnswerController@show');
@@ -76,3 +74,4 @@ Route::get('nivel/{nivel}', 'NivelController@show');
 Route::post('nivel', 'NivelController@store');
 Route::put('nivel/{nivel}', 'NivelController@update');
 Route::delete('nivel/nivel}', 'NivelController@delete');
+
