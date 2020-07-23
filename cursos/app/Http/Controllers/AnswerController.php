@@ -11,24 +11,26 @@ class AnswerController extends Controller
     {
         return Answer::all();
     }
-    public function show($id)
+    public function show( Answer $answer)
     {
-        return Answer::find($id);
+        return $answer;
     }
     public function store(Request $request)
     {
-        return Answer::create($request->all());
+        $answer = Answer::create($request->all());
+        return response()->json($answer, 201);
     }
-    public function update(Request $request, $id)
+    public function update(Request $request,  Answer $answer)
     {
-        $answer = Answer::findOrFail($id);
+
         $answer->update($request->all());
-        return $answer;
+        return response()->json($answer, 200);
+
     }
-    public function delete(Request $request, $id)
+    public function delete(Answer $answer)
     {
-        $answer = Answer::findOrFail($id);
         $answer->delete();
-        return 204;
+        return response()->json(null, 204);
+
     }
 }

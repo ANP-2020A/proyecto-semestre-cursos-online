@@ -11,24 +11,25 @@ class SelectAnswerController extends Controller
     {
         return SelectAnswer::all();
     }
-    public function show($id)
+    public function show(SelectAnswer $selectAnswer)
     {
-        return SelectAnswer::find($id);
+        return $selectAnswer;
     }
     public function store(Request $request)
     {
-        return SelectAnswer::create($request->all());
+        $selectAnswer = Answer::create($request->all());
+        return response()->json($selectAnswer, 201);
     }
-    public function update(Request $request, $id)
+    public function update(Request $request,SelectAnswer $selectAnswer)
     {
-        $answer = SelectAnswer::findOrFail($id);
-        $answer->update($request->all());
-        return $answer;
+        $selectAnswer = SelectAnswer::findOrFail($id);
+        return response()->json($selectAnswer, 200);
+        ;
     }
-    public function delete(Request $request, $id)
+    public function delete(SelectAnswer $selectAnswer)
     {
-        $answer = SelectAnswer::findOrFail($id);
-        $answer->delete();
-        return 204;
+        $selectAnswer->delete();
+        return response()->json(null, 204);
+
     }
 }

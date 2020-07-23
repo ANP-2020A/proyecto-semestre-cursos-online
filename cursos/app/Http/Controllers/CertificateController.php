@@ -11,24 +11,24 @@ class CertificateController extends Controller
     {
         return Certificate::all();
     }
-    public function show($id)
+    public function show(Certificate $certificate)
     {
-        return Certificate::find($id);
+        return $certificate;
     }
     public function store(Request $request)
     {
-        return Certificate::create($request->all());
+        $certificate = Certificate::create($request->all());
+        return response()->json($certificate, 201);
     }
-    public function update(Request $request, $id)
+    public function update(Request $request,Certificate $certificate)
     {
-        $certificate = Certificate::findOrFail($id);
         $certificate->update($request->all());
-        return $certificate;
+        return response()->json($certificate, 200);
     }
-    public function delete(Request $request, $id)
+    public function delete(Certificate $certificate)
     {
-        $certificate = Certificate::findOrFail($id);
         $certificate->delete();
-        return 204;
+        return response()->json(null, 204);
+
     }
 }

@@ -19,21 +19,21 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 //Respuestas
 Route::get('answers', 'AnswerController@index');
-Route::get('answers/{id}', 'AnswerController@show');
+Route::get('answers/{answer}', 'AnswerController@show');
 Route::post('answers', 'AnswerController@store');
-Route::put('answers/{id}', 'AnswerController@update');
-Route::delete('answers/{id}', 'AnswerController@delete');
+Route::put('answers/{answer}', 'AnswerController@update');
+Route::delete('answers/{answer}', 'AnswerController@delete');
 //Certificados
 Route::get('certificates', 'CertificateController@index');
-Route::get('certificates/{id}', 'CertificateController@show');
+Route::get('certificates/{certificate}', 'CertificateController@show');
 Route::post('certificates', 'CertificateController@store');
-Route::put('certificates/{id}', 'CertificateController@update');
-Route::delete('certificates/{id}', 'CertificateController@delete');
+Route::put('certificates/{certificate}', 'CertificateController@update');
+Route::delete('certificates/{certificate}', 'CertificateController@delete');
 //Respuestas seleccionadas
-Route::get('select_answers', 'SelectAnswerController@index');
-Route::get('select_answers/{id}', 'SelectAnswerController@show');
-Route::post('select_answers', 'SelectAnswerController@store');
-Route::put('select_answers/{id}', 'SelectAnswerController@update');
-Route::delete('select_answers/{id}', 'SelectAnswerController@delete');
+Route::get('selectanswers', 'SelectAnswerController@index');
+Route::get('selectanswers/{selectAnswer}', 'SelectAnswerController@show');
+Route::post('selectanswers', 'SelectAnswerController@store');
+Route::put('selectanswers/{selectAnswer}', 'SelectAnswerController@update');
+Route::delete('selectanswers/{selectAnswer}', 'SelectAnswerController@delete');
 
 
