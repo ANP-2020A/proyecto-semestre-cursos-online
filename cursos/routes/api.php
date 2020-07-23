@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 |
 */
 
+<<<<<<< HEAD
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
@@ -37,3 +38,5 @@ Route::put('selectanswers/{selectAnswer}', 'SelectAnswerController@update');
 Route::delete('selectanswers/{selectAnswer}', 'SelectAnswerController@delete');
 
 
+=======
+>>>>>>> dd4af6efd9cc2e69e941f84bf360cd936cfc452f
