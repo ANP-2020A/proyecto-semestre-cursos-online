@@ -10,11 +10,8 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
-    { Schema::disableForeignKeyConstraints();
-        $this->call(AnswersTableSeeder::class);
-        $this->call(CertificatesTableSeeder::class);
-        $this->call(SelectAnswersTableSeeder::class);
-        Schema::enableForeignKeyConstraints();
+    public function run(){
+    
     }
+
 }
