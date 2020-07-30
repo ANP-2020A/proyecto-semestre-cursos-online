@@ -2,7 +2,7 @@
 
 namespace App;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+/*use Illuminate\Contracts\Auth\MustVerifyEmail;*/
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
@@ -47,4 +47,12 @@ class User extends Authenticatable  implements JWTSubject
     {
         return [];
     }
+    /*Relacion de uno a muchos, un usuario tiene varios cursos*/
+    public function cursos()
+    {
+        return $this->belongsToMany('App\Cursos','registros')->withPivot('avance','calificacion');
+    }
+    /*Relacion de muchos a muchos, entre usuario y cursos*/
+
+
 }
