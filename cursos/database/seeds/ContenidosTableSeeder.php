@@ -16,12 +16,16 @@ class ContenidosTableSeeder extends Seeder
         Contenido::truncate();
         $faker = \Faker\Factory::create();
 
-        // Crear contenidos ficticios en la tabla
-        for($i = 0; $i < 30; $i++)
-        {
-            Contenido::create([
-                'Descripcion'=> $faker->paragraph,
-            ]);
+        // Crear niveles ficticios en la tabla
+        $num_contenido = 5;
+
+        for ($j = 1; $j < 10; $j++) {
+            for($i = 1; $i < $num_contenido; $i++){
+                Contenido::create([
+                    'Descripcion' => $faker->sentence,
+                    'nivel_id' => $j,
+                ]);
+            }
         }
     }
 }

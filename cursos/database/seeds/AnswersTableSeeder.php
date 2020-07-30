@@ -12,20 +12,22 @@ class AnswersTableSeeder extends Seeder
      */
     public function run()
     {
-        // Vaciar la tabla.
-         Answer::truncate();
-         $faker = \Faker\Factory::create();
-        Answer::create([
-            'Descrip_Resp' => 'Respuesta de prueba',
-            'Correct_Resp' => false,
-        ]);
-         // Crear respuestas ficticias  en la tabla
-         for ($i = 0; $i < 25; $i++) {
-         Answer::create([
-         'Descrip_Resp' => $faker->paragraph,
-         'Correct_Resp' => $faker->boolean,
-         ]);
-         }
+        //Vaciar la tabla.
+        Answer::truncate();
+        $faker = \Faker\Factory::create();
+
+        // Crear niveles ficticios en la tabla
+        $num_answer = 4;
+
+        for ($j = 1; $j < 11; $j++) {
+            for($i = 0; $i < $num_answer; $i++){
+                Answer::create([
+                    'Descrip_Resp' => $faker->sentence,
+                    'Correct_Resp' => $faker->numberBetween(0,1),
+                    'pregunta_id' => $j,
+                ]);
+            }
+        }
 
     }
 }

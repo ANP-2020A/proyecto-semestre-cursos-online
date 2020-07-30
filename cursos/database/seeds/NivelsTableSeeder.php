@@ -2,6 +2,7 @@
 
 use App\Nivel;
 use Illuminate\Database\Seeder;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class NivelsTableSeeder extends Seeder
 {
@@ -17,13 +18,17 @@ class NivelsTableSeeder extends Seeder
         $faker = \Faker\Factory::create();
 
         // Crear niveles ficticios en la tabla
-        for($i = 0; $i < 6; $i++)
-        {
-            Nivel::create([
-                'Titulo'=> $faker->sentence,
-                'Numero'=> $faker->numberBetween(1,6),
-                'Descripcion'=> $faker->paragraph,
-            ]);
+        $num_nivel = 6;
+
+        for ($j = 1; $j < 22; $j++) {
+            for($i = 1; $i < $num_nivel; $i++){
+                Nivel::create([
+                    'Titulo' => $faker->sentence,
+                    'Numero' => $i,
+                    'Descripcion' => $faker->paragraph,
+                    'curso_id' => $j,
+                ]);
+            }
         }
     }
 }

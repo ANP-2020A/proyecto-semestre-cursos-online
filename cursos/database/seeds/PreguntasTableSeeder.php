@@ -15,18 +15,20 @@ class PreguntasTableSeeder extends Seeder
     {
         //Vaciar la tabla.
         Preguntas::truncate();
-
         $faker = \Faker\Factory::create();
 
+        // Crear niveles ficticios en la tabla
+        $num_preguntas = 11;
 
-        $valor = 1;
-
-        // Crear productos ficticios en la tabla
-        for($i = 0; $i < 20; $i++) {
-            Preguntas::create([
-                'descripcion' => $faker->sentence,
-                'valor' => $valor,
-            ]);
+        for ($j = 1; $j < 10; $j++) {
+            for($i = 1; $i < $num_preguntas; $i++){
+                Preguntas::create([
+                    'descripcion' => $faker->sentence,
+                    'valor' => 1,
+                    'nivel_id' => $j,
+                ]);
+            }
         }
+
     }
 }
