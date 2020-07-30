@@ -17,17 +17,25 @@ class AnswersTableSeeder extends Seeder
         $faker = \Faker\Factory::create();
 
         // Crear niveles ficticios en la tabla
-        $num_answer = 4;
+        $num_answer = 5;
+        $num_preguntas = 1;
+        $preguntas1= \App\Preguntas::all();
 
-        for ($j = 1; $j < 11; $j++) {
-            for($i = 0; $i < $num_answer; $i++){
-                Answer::create([
-                    'Descrip_Resp' => $faker->sentence,
-                    'Correct_Resp' => $faker->numberBetween(0,1),
-                    'pregunta_id' => $j,
-                ]);
+        foreach ($preguntas1 as $preguntas) {
+            if ($num_preguntas==101){
+                break;
             }
-        }
+                for($i = 1; $i < $num_answer; $i++){
+                    Answer::create([
+                        'Descrip_Resp' => $faker->sentence,
+                        'Correct_Resp' => $faker->boolean,
+                        'pregunta_id' => $num_preguntas,
+                    ]);
+                    if ($i==4){
+                        $num_preguntas++;
+                    }
 
+                }
+            }
     }
 }

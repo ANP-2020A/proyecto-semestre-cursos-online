@@ -18,14 +18,19 @@ class ContenidosTableSeeder extends Seeder
 
         // Crear niveles ficticios en la tabla
         $num_contenido = 5;
+        $num_nivel=1;
+        $nivel1 = \App\Nivel::all();
 
-        for ($j = 1; $j < 10; $j++) {
-            for($i = 1; $i < $num_contenido; $i++){
-                Contenido::create([
-                    'Descripcion' => $faker->sentence,
-                    'nivel_id' => $j,
-                ]);
-            }
+        foreach ($nivel1 as $nivel) {
+                for($i = 1; $i < $num_contenido; $i++){
+                    Contenido::create([
+                        'Descripcion' => $faker->sentence,
+                        'nivel_id'=>$num_nivel,
+                    ]);
+                    if ($i==4){
+                        $num_nivel++;
+                    }
+                }
         }
     }
 }

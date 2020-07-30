@@ -19,16 +19,21 @@ class NivelsTableSeeder extends Seeder
 
         // Crear niveles ficticios en la tabla
         $num_nivel = 6;
+        $curso1 = \App\Cursos::all();
+        $num_curso = 1;
+        foreach ($curso1 as $cursos) {
+                for($i = 1; $i < $num_nivel; $i++){
+                    Nivel::create([
+                        'Titulo' => $faker->sentence,
+                        'Numero' => $i,
+                        'Descripcion' => $faker->paragraph,
+                        'curso_id'=>$num_curso
+                    ]);
+                    if ($i==5){
+                        $num_curso++;
+                    }
+                }
 
-        for ($j = 1; $j < 22; $j++) {
-            for($i = 1; $i < $num_nivel; $i++){
-                Nivel::create([
-                    'Titulo' => $faker->sentence,
-                    'Numero' => $i,
-                    'Descripcion' => $faker->paragraph,
-                    'curso_id' => $j,
-                ]);
-            }
         }
     }
 }
