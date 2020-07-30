@@ -4,30 +4,30 @@ namespace App\Http\Controllers;
 
 use App\Certificate;
 use Illuminate\Http\Request;
+use App\Http\Resources\Certificate as CertificateResource;
+use App\Http\Resources\CertificateCollection;
 
 class CertificateController extends Controller
 {
     public function index()
     {
-        return Certificate::all();
+        return new CertificateCollection(Certificate::paginate());
     }
-    public function show($id)
+    public function show( Certificate $certificate)
     {
-        return Certificate::find($id);
+        return  response()->json(new CertificateResource($certificate),200);
     }
     public function store(Request $request)
     {
         return Certificate::create($request->all());
     }
-    public function update(Request $request, $id)
+    public function update(Request $request, Certificate $certificate)
     {
-        $certificate = Certificate::findOrFail($id);
         $certificate->update($request->all());
         return $certificate;
     }
-    public function delete(Request $request, $id)
+    public function delete(Request $request, Certificate $certificate)
     {
-        $certificate = Certificate::findOrFail($id);
         $certificate->delete();
         return 204;
     }

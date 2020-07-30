@@ -3,31 +3,34 @@
 namespace App\Http\Controllers;
 
 use App\Answer;
+
 use Illuminate\Http\Request;
+use App\Http\Resources\Answer as AnswerResource;
+use App\Http\Resources\AnswerCollection;
 
 class AnswerController extends Controller
 {
     public function index()
     {
-        return Answer::all();
+        return new AnswerCollection( Answer::all());
     }
-    public function show($id)
+    public function show( Answer $answer)
     {
-        return Answer::find($id);
+        return  response()->json(new AnswerResource($answer),200);
     }
     public function store(Request $request)
     {
         return Answer::create($request->all());
     }
-    public function update(Request $request, $id)
+    public function update(Request $request,Answer $answer)
     {
-        $answer = Answer::findOrFail($id);
+
         $answer->update($request->all());
         return $answer;
     }
-    public function delete(Request $request, $id)
+    public function delete(Request $request,Answer $answer)
     {
-        $answer = Answer::findOrFail($id);
+
         $answer->delete();
         return 204;
     }

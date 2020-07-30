@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers;
 use App\Historial;
+use App\Http\Resources\Historial as HistorialResource;
+use App\Http\Resources\HistorialCollection;
 use Illuminate\Http\Request;
 
 class HistorialController extends Controller
 {
     public function index()
     {
-        return Historial::all();
+        return new HistorialCollection(Historial::all());
     }
 
     public function show(Historial $historial)
     {
-        return $historial;
+        return response()->json(new HistorialResource($historial),200);
     }
 
     public function store(Request $request)

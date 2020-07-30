@@ -3,17 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\SelectAnswer;
+use App\Http\Resources\SelectAnswerCollection;
+use App\Http\Resources\SelectAnswer as SelectAnswerResource;
 use Illuminate\Http\Request;
 
 class SelectAnswerController extends Controller
 {
     public function index()
     {
-        return SelectAnswer::all();
+        return new SelectAnswerCollection(SelectAnswer::all());
     }
-    public function show($id)
+    public function show(SelectAnswer $selectAnswer)
     {
-        return SelectAnswer::find($id);
+        return  response()->json(new SelectAnswerResource($selectAnswer),200);
     }
     public function store(Request $request)
     {
