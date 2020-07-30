@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers;
 use App\Nivel;
+use App\Http\Resources\Nivel as NivelesResources;
+use App\Http\Resources\NivelCollection;
 use Illuminate\Http\Request;
 
 class NivelController extends Controller
 {
     public function index()
     {
-        return Nivel::all();
+        return new NivelCollection(Nivel::all());
     }
 
     public function show(Nivel $nivel)
     {
-        return $nivel;
+        return response()->json(new NivelesResources($nivel),200);
     }
 
     public function store(Request $request)

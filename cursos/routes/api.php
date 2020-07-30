@@ -36,16 +36,16 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::delete('preguntas/preguntas}', 'PreguntaController@delete');
     //Respuestas
     Route::get('answers', 'AnswerController@index');
-    Route::get('answers/{id}', 'AnswerController@show');
+    Route::get('answers/{answer}', 'AnswerController@show');
     Route::post('answers', 'AnswerController@store');
-    Route::put('answers/{id}', 'AnswerController@update');
-    Route::delete('answers/{id}', 'AnswerController@delete');
+    Route::put('answers/{answer}', 'AnswerController@update');
+    Route::delete('answers/{answer}', 'AnswerController@delete');
     //Respuestas seleccionadas
     Route::get('select_answers', 'SelectAnswerController@index');
-    Route::get('select_answers/{id}', 'SelectAnswerController@show');
+    Route::get('select_answers/{selectAnswer}', 'SelectAnswerController@show');
     Route::post('select_answers', 'SelectAnswerController@store');
-    Route::put('select_answers/{id}', 'SelectAnswerController@update');
-    Route::delete('select_answers/{id}', 'SelectAnswerController@delete');
+    Route::put('select_answers/{selectAnswer}', 'SelectAnswerController@update');
+    Route::delete('select_answers/{selectAnswer}', 'SelectAnswerController@delete');
     //Historial
     Route::get('historial', 'HistorialController@index');
     Route::get('historial/{historial}', 'HistorialController@show');
@@ -54,21 +54,21 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::delete('historial/historial}', 'HistorialController@delete');
     //Certificados
     Route::get('certificates', 'CertificateController@index');
-    Route::get('certificates/{id}', 'CertificateController@show');
+    Route::get('certificates/{certificate}', 'CertificateController@show');
     Route::post('certificates', 'CertificateController@store');
-    Route::put('certificates/{id}', 'CertificateController@update');
-    Route::delete('certificates/{id}', 'CertificateController@delete');
+    Route::put('certificates/{certificate}', 'CertificateController@update');
+    Route::delete('certificates/{certificate}', 'CertificateController@delete');
     //Cursos
 
     Route::post('cursos', 'CursosController@store');
     Route::put('cursos/{cursos}', 'CursosController@update');
     Route::delete('cursos/cursos}', 'CursosController@delete');
     //Nivel
-    Route::get('nivel', 'NivelController@index');
-    Route::get('nivel/{nivel}', 'NivelController@show');
-    Route::post('nivel', 'NivelController@store');
-    Route::put('nivel/{nivel}', 'NivelController@update');
-    Route::delete('nivel/nivel}', 'NivelController@delete');
+    Route::get('niveles', 'NivelController@index');
+    Route::get('niveles/{nivel}', 'NivelController@show');
+    Route::post('niveles', 'NivelController@store');
+    Route::put('niveles/{nivel}', 'NivelController@update');
+    Route::delete('niveles/nivel}', 'NivelController@delete');
     //Contenido
     Route::get('contenido', 'ContenidoController@index');
     Route::get('contenido/{contenido}', 'ContenidoController@show');

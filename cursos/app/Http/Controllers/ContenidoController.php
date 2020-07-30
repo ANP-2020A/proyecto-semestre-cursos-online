@@ -3,17 +3,19 @@
 namespace App\Http\Controllers;
 use App\Contenido;
 use Illuminate\Http\Request;
+use App\Http\Resources\Contenido as ContenidoResource;
+use App\Http\Resources\ContenidoCollection;
 
 class ContenidoController extends Controller
 {
     public function index()
     {
-    return Contenido::all();
+        return new ContenidoCollection(Contenido::paginate());
     }
 
     public function show(Contenido $contenido)
     {
-        return $contenido;
+        return response()->json(new ContenidoResource($contenido),200);
     }
 
     public function store(Request $request)

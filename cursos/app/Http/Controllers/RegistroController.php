@@ -3,18 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Registro;
+use App\Http\Resources\RegistroCollection;
+use App\Http\Resources\Registro as RegistroResource;
 use Illuminate\Http\Request;
 
 class RegistroController extends Controller
 {
     public function index()
     {
-        return Registro::all();
+        return new RegistroCollection(Registro::paginate(15));
     }
 
     public function show(Registro $registro)
     {
-        return $registro;
+        return  response()->json(new RegistroResource($registro),200);
     }
 
     public function store(Request $request)

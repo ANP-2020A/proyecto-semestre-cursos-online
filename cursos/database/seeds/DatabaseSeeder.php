@@ -23,9 +23,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RegistrosTableSeeder::class);
         $this->call(CertificatesTableSeeder::class);
         /*
-
         $this->call(HistorialsTableSeeder::class);
-
         $this->call(SelectAnswersTableSeeder::class);*/
         Schema::enableForeignKeyConstraints();
     }

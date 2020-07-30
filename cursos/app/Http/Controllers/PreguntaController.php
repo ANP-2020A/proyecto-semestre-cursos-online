@@ -3,18 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Preguntas;
+use App\Http\Resources\Preguntas as PreguntasResource;
+use App\Http\Resources\PreguntasCollection;
 use Illuminate\Http\Request;
 
 class PreguntaController extends Controller
 {
     public function index()
     {
-        return Preguntas::all();
+        return new PreguntasCollection(Preguntas::all());
     }
 
     public function show(Preguntas $preguntas)
     {
-        return $preguntas;
+        return  response()->json(new PreguntasResource($preguntas),200);
     }
 
     public function store(Request $request)

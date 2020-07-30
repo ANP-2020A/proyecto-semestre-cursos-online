@@ -3,17 +3,19 @@
 namespace App\Http\Controllers;
 use App\Cursos;
 use Illuminate\Http\Request;
+use App\Http\Resources\Cursos as CursosResources;
+use App\Http\Resources\CursosCollection;
 
 class CursosController extends Controller
 {
     public function index()
     {
-        return Cursos::all();
+        return new CursosCollection(Cursos::all());
     }
 
     public function show(Cursos $cursos)
     {
-        return $cursos;
+        return response()->json(new CursosResources($cursos));
     }
 
     public function store(Request $request)
