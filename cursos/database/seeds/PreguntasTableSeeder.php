@@ -19,16 +19,25 @@ class PreguntasTableSeeder extends Seeder
 
         // Crear niveles ficticios en la tabla
         $num_preguntas = 11;
+        $num_nivel=1;
+        $nivel1 = \App\Nivel::all();
 
-        for ($j = 1; $j < 10; $j++) {
-            for($i = 1; $i < $num_preguntas; $i++){
-                Preguntas::create([
-                    'descripcion' => $faker->sentence,
-                    'valor' => 1,
-                    'nivel_id' => $j,
-                ]);
+        foreach ($nivel1 as $nivel) {
+            if ($num_nivel==26){
+                break;
             }
-        }
+                for($i = 1; $i < $num_preguntas; $i++){
+                    Preguntas::create([
+                        'descripcion' => $faker->sentence,
+                        'valor' => 1,
+                        'nivel_id' => $num_nivel,
+                    ]);
 
+                    if ($i==10){
+                        $num_nivel++;
+
+                    }
+                }
+        }
     }
 }

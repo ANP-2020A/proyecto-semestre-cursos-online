@@ -19,15 +19,15 @@ class CertificatesTableSeeder extends Seeder
 
         // Crear niveles ficticios en la tabla
         $num_registros = 15;
+        $registros1 = \App\Registro::all();
 
-
-           for($i = 1; $i < $num_registros; $i++){
-
+        foreach ($registros1 as $registro){
+            for($i = 1; $i < $num_registros; $i++){
                 Certificate::create([
                     'Descrip_cert' => $faker->paragraph,
-                    'registro_id' => $i,
+                    'registro_id'=>$i,
                 ]);
             }
-
+        }
     }
 }
