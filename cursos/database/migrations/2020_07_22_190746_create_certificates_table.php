@@ -15,7 +15,7 @@ class CreateCertificatesTable extends Migration
     {
         Schema::create('certificates', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('Descrip_cert');
+            $table->string('description');
             $table->timestamps();
         });
     }

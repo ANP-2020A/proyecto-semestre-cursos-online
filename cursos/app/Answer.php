@@ -6,15 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Answer extends Model
 {
-    protected $fillable = ['Descrip_Resp','Correct_Resp'];
+    protected $fillable = ['description','correct'];
 
     /*Relaciones de uno a muchos inversa, una respuesta pertenece a una pregunta*/
-    public function preguntas()
+    public function question()
     {
-        return $this->belongsTo('App\Preguntas');
+        return $this->belongsTo('App\Question');
     }
-    public function historial()
+    public function record()
     {
-        return $this->belongsToMany('App\Historial','select_answers')->withPivot('Select_Resp','Nota_rs');
+        return $this->belongsToMany('App\Record','select_answers')->withPivot('selection','value');
     }
 }

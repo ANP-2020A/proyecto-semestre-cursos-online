@@ -15,8 +15,8 @@ class CreateSelectAnswersTable extends Migration
     {
         Schema::create('select_answers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('Select_Resp');
-            $table->integer('Nota_rs');
+            $table->string('selection');
+            $table->integer('value');
             $table->timestamps();
         });
     }

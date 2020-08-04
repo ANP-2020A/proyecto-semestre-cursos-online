@@ -14,7 +14,6 @@ class UserController extends Controller
     public function authenticate(Request $request)
     {
         $credentials = $request->only('email', 'password');
-
         try {
             if (! $token = JWTAuth::attempt($credentials)) {
                 return response()->json(['error' => 'invalid_credentials'], 400);
@@ -29,11 +28,11 @@ class UserController extends Controller
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'nombre' => 'required|string|max:255',
-            'apellido' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
-            'tipo' => 'required|string|max:255',
+            'type' => 'required|string|max:255',
         ]);
 
         if($validator->fails()){
@@ -41,11 +40,11 @@ class UserController extends Controller
         }
 
         $user = User::create([
-            'nombre' => $request->get('nombre'),
-            'apellido' => $request->get('apellido'),
+            'name' => $request->get('name'),
+            'last_name' => $request->get('last_name'),
             'email' => $request->get('email'),
             'password' => Hash::make($request->get('password')),
-            'tipo' => $request->get('tipo'),
+            'type' => $request->get('type'),
         ]);
 
         $token = JWTAuth::fromUser($user);

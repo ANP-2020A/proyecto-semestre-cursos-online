@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateContenidosTable extends Migration
+class CreateLevelsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateContenidosTable extends Migration
      */
     public function up()
     {
-        Schema::create('contenidos', function (Blueprint $table) {
+        Schema::create('levels', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->text('Descripcion');
+            $table->string('title');
+            $table->integer('number');
+            $table->text('description');
             $table->timestamps();
         });
     }
@@ -27,6 +29,6 @@ class CreateContenidosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('contenidos');
+        Schema::dropIfExists('levels');
     }
 }

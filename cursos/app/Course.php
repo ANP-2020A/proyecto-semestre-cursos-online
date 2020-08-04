@@ -5,25 +5,25 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
-class Cursos extends Model
+class Course extends Model
 {
-    protected $fillable = ['Nombre', 'Descripcion', 'Tipo', 'FechaInicio','Niveles'];
+    protected $fillable = ['name', 'description', 'type', 'date_start','num_level'];
     /*Relacion de uno a muchos, un curso tiene varios niveles*/
-    public function nivel()
+    public function level()
     {
-        return $this->hasMany('App\Nivel');
+        return $this->hasMany('App\Level');
     }
     /*Relacion de uno a muchos inversa, un curso pertenece a un usuario*/
     public function user()
     {
-        return $this->belongsToMany('App\User','registros')->withPivot('avance','calificacion');
+        return $this->belongsToMany('App\User','registers')->withPivot('advance','score');
     }
 
     public static function boot()
     {
         parent::boot();
-        static::creating(function ($cursos) {
-            $cursos->user_id = Auth::id();
+        static::creating(function ($courses) {
+            $courses->user_id = Auth::id();
         });
     }
 }

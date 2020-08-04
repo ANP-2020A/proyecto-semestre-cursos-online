@@ -17,7 +17,7 @@ class User extends Authenticatable  implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'nombre','apellido', 'email','tipo', 'password',
+        'name','last_name', 'email','type', 'password',
     ];
 
     /**
@@ -48,9 +48,9 @@ class User extends Authenticatable  implements JWTSubject
         return [];
     }
     /*Relacion de uno a muchos, un usuario tiene varios cursos*/
-    public function cursos()
+    public function course()
     {
-        return $this->belongsToMany('App\Cursos','registros')->withPivot('avance','calificacion');
+        return $this->belongsToMany('App\Course','registers')->withPivot('advance','score');
     }
     /*Relacion de muchos a muchos, entre usuario y cursos*/
 
