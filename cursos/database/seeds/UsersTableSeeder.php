@@ -1,8 +1,7 @@
 <?php
 
-use App\Cursos;
+use App\Course;
 use App\User;
-use App\Category;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -26,30 +25,30 @@ class UsersTableSeeder extends Seeder
         $password = Hash::make('123123');
 
         User::create([
-                'nombre'=> 'Administrador',
-                'apellido'=> 'Admi',
+                'name'=> 'Administrador',
+                'last_name'=> 'Admi',
                 'email'=> 'admin@prueba.com',
-                'tipo'=> 'administrador',
+                'type'=> 'admin',
                 'password'=> $password,]
         );
 
         // Generar algunos usuarios para nuestra aplicacion
         for($i = 0; $i < 6; $i++) {
             $user = User::create([
-                'nombre'=> $faker->name,
-                'apellido'=> $faker->lastName,
+                'name'=> $faker->name,
+                'last_name'=> $faker->lastName,
                 'email'=> $faker->email,
-                'tipo'=> 'administrador',
+                'type'=> 'admin',
                 'password'=> $password,
             ]);
         }
 
         for($i = 0; $i < 10; $i++) {
             $user = User::create([
-                'nombre'=> $faker->name,
-                'apellido'=> $faker->lastName,
+                'name'=> $faker->name,
+                'last_name'=> $faker->lastName,
                 'email'=> $faker->email,
-                'tipo'=> 'estudiante',
+                'type'=> 'student',
                 'password'=> $password,
             ]);
         }

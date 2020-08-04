@@ -30,7 +30,6 @@ class AnswerController extends Controller
     }
     public function delete(Request $request,Answer $answer)
     {
-
         $answer->delete();
         return 204;
     }

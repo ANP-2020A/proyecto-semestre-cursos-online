@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateHistorialsTable extends Migration
+class CreateRegistersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateHistorialsTable extends Migration
      */
     public function up()
     {
-        Schema::create('historials', function (Blueprint $table) {
+        Schema::create('registers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->date('FechaHistorial');
-            $table->integer('Calificacion');
-            $table->text('Comentario');
+            $table->integer('progress'); /**Porcentaje de avance del curso (0-255)**/
+            $table->integer('score');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateHistorialsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('historials');
+        Schema::dropIfExists('registers');
     }
 }

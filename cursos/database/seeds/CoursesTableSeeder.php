@@ -1,10 +1,10 @@
 <?php
 
-use App\Cursos;
+use App\Course;
 use Illuminate\Database\Seeder;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
-class CursosTableSeeder extends Seeder
+class CoursesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,7 +14,7 @@ class CursosTableSeeder extends Seeder
     public function run()
     {
         // Vaciar la tabla articles.
-        Cursos::truncate();
+        Course::truncate();
         $faker = \Faker\Factory::create();
 
         // Obtenemos la lista de todos los usuarios creados e
@@ -24,19 +24,19 @@ class CursosTableSeeder extends Seeder
 
         foreach ($users as $user) {
             // iniciamos sesión con este usuario
-            JWTAuth::attempt(['email' => $user->email, 'password' => '123123', 'tipo' => $user->tipo]);
+            JWTAuth::attempt(['email' => $user->email, 'password' => '123123', 'type' => $user->type]);
 
             // Y ahora con este usuario creamos algunos articulos
-            $num_cursos = 3;
+            $num_courses = 3;
 
-            for ($j = 0; $j < $num_cursos; $j++) {
-                if($user->tipo=='administrador'){
-                    Cursos::create([
-                        'Nombre' => $faker->sentence,
-                        'Descripcion' => $faker->paragraph,
-                        'Tipo' => $faker->word,
-                        'FechaInicio' => $faker->date('Y-m-d','now'),
-                        'Niveles' => 5,
+            for ($j = 0; $j < $num_courses; $j++) {
+                if($user->type=='admin'){
+                    Course::create([
+                        'name' => $faker->sentence,
+                        'description' => $faker->paragraph,
+                        'type' => $faker->word,
+                        'date_start' => $faker->date('Y-m-d','now'),
+                        'num_level' => 5,
                     ]);
                 }
             }

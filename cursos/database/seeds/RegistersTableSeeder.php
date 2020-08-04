@@ -1,10 +1,10 @@
 <?php
 
-use App\Registro;
+use App\Register;
 use Illuminate\Database\Seeder;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
-class RegistrosTableSeeder extends Seeder
+class RegistersTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,7 +14,7 @@ class RegistrosTableSeeder extends Seeder
     public function run()
     {
         // Vaciar la tabla articles.
-        Registro::truncate();
+        Register::truncate();
         $faker = \Faker\Factory::create();
 
         // Obtenemos la lista de todos los usuarios creados e
@@ -24,17 +24,17 @@ class RegistrosTableSeeder extends Seeder
 
         foreach ($users as $user) {
             // iniciamos sesión con este usuario
-            JWTAuth::attempt(['email' => $user->email, 'password' => '123123', 'tipo' => $user->tipo]);
+            JWTAuth::attempt(['email' => $user->email, 'password' => '123123', 'type' => $user->type]);
 
-            // Y ahora con este usuario creamos algunos articulos
-            $num_cursos = 3;
+            // Y ahora con este usuario creamos algunos registros a cursos
+            $num_courses = 3;
 
-            for ($j = 0; $j < $num_cursos; $j++) {
-                if($user->tipo=='estudiante'){
-                    Registro::create([
-                        'avance' => $faker->numberBetween(1,100),
-                        'calificacion' => $faker->numberBetween(1,20),
-                        'curso_id' => $faker->numberBetween(1,21)
+            for ($j = 0; $j < $num_courses; $j++) {
+                if($user->type=='student'){
+                    Register::create([
+                        'progress' => $faker->numberBetween(1,100),
+                        'score' => $faker->numberBetween(1,20),
+                        'course_id' => $faker->numberBetween(1,21)
                     ]);
                 }
             }
