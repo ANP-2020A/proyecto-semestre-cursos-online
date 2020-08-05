@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class Nivel extends JsonResource
+class Question extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,12 +16,10 @@ class Nivel extends JsonResource
     {
         return [
             'id' => $this->id,
-            'Titulo' => $this->Titulo,
-            'Número' => $this->Numero,
-            'Descripcion' => $this->Descripcion,
-            'Curso_id' => "/api/cursos/".$this->curso_id,
+            'Description' => $this->description,
+            'Value' => $this->value,
+            'Level_id' => "/api/levels/".$this->level_id,
             'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
         ];
     }
 }

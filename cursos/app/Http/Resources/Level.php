@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class Historial extends JsonResource
+class Level extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,11 +16,10 @@ class Historial extends JsonResource
     {
         return [
             'id' => $this->id,
-            'Nombre' => $this->FechaHistorial,
-            'Descripción' => $this->Calificacion,
-            'Tipo' => $this->Comentario,
-            'Niveles' =>"/api/niveles/".$this->nivel_id,
-            'User_id' => "/api/registros/".$this->registro_id,
+            'Title' => $this->title,
+            'Number' => $this->number,
+            'Description' => $this->description,
+            'Course_id' => "/api/courses/".$this->course_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
