@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
 Route::post('register', 'UserController@register');
 Route::post('login', 'UserController@authenticate');
 Route::get('courses', 'CourseController@index');
-Route::get('courses/{courses}', 'CourseController@show');
+Route::get('courses/{course}', 'CourseController@show');
 
 Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('user', 'UserController@getAuthenticatedUser');
@@ -33,7 +33,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('questions/{question}', 'QuestionController@show');
     Route::post('questions', 'QuestionController@store');
     Route::put('questions/{question}', 'QuestionController@update');
-    Route::delete('questions/question}', 'QuestionController@delete');
+    Route::delete('questions/{question}', 'QuestionController@delete');
     //Respuestas
     Route::get('answers', 'AnswerController@index');
     Route::get('answers/{answer}', 'AnswerController@show');
@@ -51,7 +51,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('records/{record}', 'RecordController@show');
     Route::post('records', 'RecordController@store');
     Route::put('records/{record}', 'RecordController@update');
-    Route::delete('records/records}', 'RecordController@delete');
+    Route::delete('records/{record}', 'RecordController@delete');
     //Certificados
     Route::get('certificates', 'CertificateController@index');
     Route::get('certificates/{certificate}', 'CertificateController@show');
