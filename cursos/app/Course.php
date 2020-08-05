@@ -14,9 +14,10 @@ class Course extends Model
         return $this->hasMany('App\Level');
     }
     /*Relacion de uno a muchos inversa, un curso pertenece a un usuario*/
+
     public function user()
     {
-        return $this->belongsToMany('App\User','registers')->withPivot('advance','score');
+        return $this->belongsToMany('App\User','registers')->withPivot('progress','score');
     }
 
     public static function boot()
