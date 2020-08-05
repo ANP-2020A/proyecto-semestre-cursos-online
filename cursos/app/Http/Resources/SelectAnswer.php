@@ -16,10 +16,10 @@ class SelectAnswer extends JsonResource
     {
         return [
             'id' => $this->id,
-            'Respuest_seleccionada' => $this->avance,
-            'Nota' => $this->calificacion,
+            'Selection' => $this->selection,
+            'Value' => $this->value,
             'Answer_id' => "/api/answers/".$this->answer_id,
-            'Historial_id' => "/api/historial/".$this->historial_id
+            'Record_id' => "/api/records/".$this->record_id
         ];
     }
 }

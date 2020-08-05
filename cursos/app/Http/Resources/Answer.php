@@ -16,9 +16,9 @@ class Answer extends JsonResource
     {
         return [
             'id' => $this->id,
-            'Descripción' => $this->Descrip_Resp,
-            'Respuesta_correcta' => $this->Correct_Resp,
-            'Registro_id' => "/api/preguntas/".$this->pregunta_id,
+            'Description' => $this->description,
+            'Correct_Answer' => $this->correct,
+            'Quetion_id' => "/api/questions/".$this->question_id,
         ];
     }
 }

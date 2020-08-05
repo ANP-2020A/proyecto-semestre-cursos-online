@@ -17,8 +17,8 @@ class Certificate extends JsonResource
     {
         return [
             'id' => $this->id,
-            'Descripción' => $this->Descrip_cert,
-            'Registro_id' => "/api/registros/".$this->registro_id,
+            'Description' => $this->description,
+            'Register_id' => "/api/registers/".$this->register_id,
             ];
     }
 
