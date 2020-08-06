@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 class Register extends Model
 {
-    protected $guarded = ['progress','score'];
+    protected $guarded = ['progress','score'/*,'user_id','course_id' ,'updated_at', 'created_at'*/];
 
     public function certificate()
     {

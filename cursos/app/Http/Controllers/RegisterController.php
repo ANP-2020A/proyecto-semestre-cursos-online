@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
+   /* private static $messages = [
+        'required'=>'El campo :attribute es obligatorio.',
+        'exists'=>'El campo :attribute que ingreso no existe en la base de datos'
+    ];*/
+
     public function index()
     {
         return new RegisterCollection(Register::paginate(15));
@@ -21,6 +26,14 @@ class RegisterController extends Controller
 
     public function store(Request $request)
     {
+
+       /* $request->validate([
+            'progress' => 'required|integer',
+            'score' => 'required|integer',
+            'course_id'=>'required|exists:courses,id'
+
+        ],self::$messages);*/
+
         $register = Register::create($request->all());
 
         return response()->json($register, 201);

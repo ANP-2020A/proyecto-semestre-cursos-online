@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Level extends Model
 {
-    protected $fillable = ['title','number', 'description'];
+    protected $fillable = ['title','number', 'description','course_id'];
     /*Relaciones de uno a muchos, un nivel tiene muchos contenidos y preguntas*/
 
 

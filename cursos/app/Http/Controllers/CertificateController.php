@@ -3,23 +3,45 @@
 namespace App\Http\Controllers;
 
 use App\Certificate;
+use App\Register;
 use Illuminate\Http\Request;
 use App\Http\Resources\Certificate as CertificateResource;
 use App\Http\Resources\CertificateCollection;
 
 class CertificateController extends Controller
 {
-    public function index()
+    /**
+     * @param Register $register
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function index(Register $register)
     {
-        return new CertificateCollection(Certificate::paginate());
+        return response()->json(CertificateResource::collection($register->certificate),200);
     }
-    public function show( Certificate $certificate)
+
+    /**
+     * @param Register $register
+     * @param \App\Certificate $certificate
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function show(Register $register, Certificate $certificate)
     {
-        return  response()->json(new CertificateResource($certificate),200);
+        $certificate = $register->certificate()->where('id',$certificate->id)->firstOrFail();
+        return response()->json($certificate,200);
     }
-    public function store(Request $request)
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @param Register $register
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function store(Request $request, Register $register)
     {
-        return Certificate::create($request->all());
+        $request->validate([
+            'description' => 'required|string'
+        ]);
+        $certificate = $register->certificate()->save(new Certificate($request->all()));
+        return response()->json($certificate,201);
     }
     public function update(Request $request, Certificate $certificate)
     {
