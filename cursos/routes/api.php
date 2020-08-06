@@ -75,6 +75,11 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('contents', 'ContentController@store');
     Route::put('contents/{content}', 'ContentController@update');
     Route::delete('contents/content}', 'ContentController@delete');
+
+    Route::get('users', 'UserController@index');
+    Route::get('users/{user}/courses', 'CourseController@ind');
+    Route::get('courses/{course}/levels', 'LevelController@ind');
+
 });
 
 //Usuarios

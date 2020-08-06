@@ -53,6 +53,11 @@ class User extends Authenticatable  implements JWTSubject
         return $this->belongsToMany('App\Course','registers')->withPivot('progress','score');
     }
     /*Relacion de muchos a muchos, entre usuario y cursos*/
+    public function courses()
+    {
+        return $this->hasMany('App\Course');
+
+    }
 
 
 }

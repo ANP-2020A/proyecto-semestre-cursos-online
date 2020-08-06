@@ -19,6 +19,10 @@ class Course extends Model
     {
         return $this->belongsToMany('App\User','registers')->withPivot('progress','score');
     }
+    public function users()
+    {
+        return $this->belongsTo('App\User');
+    }
 
     public static function boot()
     {

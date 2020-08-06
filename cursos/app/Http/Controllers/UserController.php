@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\UserCollection;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -68,5 +69,9 @@ class UserController extends Controller
         }
 
         return response()->json(compact('user'));
+    }
+    public function index()
+    {
+        return new UserCollection( User::all());
     }
 }
