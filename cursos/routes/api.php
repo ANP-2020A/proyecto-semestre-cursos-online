@@ -53,11 +53,11 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::put('records/{record}', 'RecordController@update');
     Route::delete('records/{record}', 'RecordController@delete');
     //Certificados
-    Route::get('certificates', 'CertificateController@index');
-    Route::get('certificates/{certificate}', 'CertificateController@show');
-    Route::post('certificates', 'CertificateController@store');
-    Route::put('certificates/{certificate}', 'CertificateController@update');
-    Route::delete('certificates/{certificate}', 'CertificateController@delete');
+    Route::get('registers/{register}/certificates', 'CertificateController@index');
+    Route::get('registers/{register}/certificates/{certificate}', 'CertificateController@show');
+    Route::post('registers/{register}/certificates', 'CertificateController@store');
+    Route::put('registers/{register}/certificates/{certificate}', 'CertificateController@update');
+    Route::delete('registers/{register}/certificates/{certificate}', 'CertificateController@delete');
     //Cursos
 
     Route::post('courses', 'CourseController@store');

@@ -7,10 +7,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use JWTAuth;
+use phpDocumentor\Reflection\Types\Self_;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
 class UserController extends Controller
 {
+    private static $messages = [
+        'required'=>'El campo :attribute es obligatorio.',
+        'unique'=>'El campo :attribute que ingreso ya existe',
+    ];
+
     public function authenticate(Request $request)
     {
         $credentials = $request->only('email', 'password');
@@ -33,7 +39,7 @@ class UserController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
             'type' => 'required|string|max:255',
-        ]);
+        ],self::$messages);
 
         if($validator->fails()){
             return response()->json($validator->errors()->toJson(), 400);

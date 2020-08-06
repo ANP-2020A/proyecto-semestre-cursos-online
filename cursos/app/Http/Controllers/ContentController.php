@@ -8,9 +8,14 @@ use App\Http\Resources\ContentCollection;
 
 class ContentController extends Controller
 {
+    private static $messages = [
+        'required'=>'El campo :attribute es obligatorio.',
+        //'exists'=>'El campo :attribute que ingreso no existe en la base de datos'
+    ];
+
     public function index()
     {
-        return new ContentCollection(Content::paginate());
+        return new ContentCollection(Content::paginate(20));
     }
 
     public function show(Content $content)
@@ -20,12 +25,22 @@ class ContentController extends Controller
 
     public function store(Request $request)
     {
-        $contenido = Content::create($request->all());
-        return response()->json($contenido, 201);
+        $request->validate([
+            'description' => 'required|string|max:255',
+          //  'level_id'=>'required|exists:levels,id'
+        ],self::$messages);
+
+        $content = Content::create($request->all());
+        return response()->json($content, 201);
     }
 
     public function update(Request $request, Content $content)
     {
+        $request->validate([
+            'description' => 'required|string|max:255',
+            //'level_id'=>'required|exists:levels,id'
+        ],self::$messages);
+
         $content ->update($request->all());
         return response()->json($content, 200);
     }
