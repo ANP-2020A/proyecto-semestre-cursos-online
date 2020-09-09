@@ -31,12 +31,17 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     //Preguntas
     Route::get('questions', 'QuestionController@index');
     Route::get('questions/{question}', 'QuestionController@show');
+
+    Route::get('levels/{level}/questions', 'QuestionController@ind');
     Route::post('questions', 'QuestionController@store');
     Route::put('questions/{question}', 'QuestionController@update');
     Route::delete('questions/{question}', 'QuestionController@delete');
     //Respuestas
     Route::get('answers', 'AnswerController@index');
     Route::get('answers/{answer}', 'AnswerController@show');
+
+    Route::get('questions/{question}/answers', 'AnswerController@ind');
+
     Route::post('answers', 'AnswerController@store');
     Route::put('answers/{answer}', 'AnswerController@update');
     Route::delete('answers/{answer}', 'AnswerController@delete');
@@ -71,13 +76,18 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::delete('levels/level}', 'LevelController@delete');
     //Contenido
     Route::get('contents', 'ContentController@index');
-    Route::get('contents/{content}', 'ContentController@show');
+    Route::get('levels/{level}/contents', 'ContentController@ind');
     Route::post('contents', 'ContentController@store');
     Route::put('contents/{content}', 'ContentController@update');
     Route::delete('contents/content}', 'ContentController@delete');
 
+    //Pruebas para visualizar usuarios
     Route::get('users', 'UserController@index');
+    Route::get('users/{user}', 'UserController@show');
+
     Route::get('users/{user}/courses', 'CourseController@ind');
+
+    //Route::get('courses/{course}/registers', 'RegisterController@ind');
     Route::get('courses/{course}/levels', 'LevelController@ind');
 
 });

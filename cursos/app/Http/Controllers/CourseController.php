@@ -13,7 +13,8 @@ class CourseController extends Controller
         'required'=>'El campo :attribute es obligatorio.',
         'unique'=>'El campo :attribute que ingreso ya existe',
         'date'=>'El formato de :attribute no es valido',
-        'integer'=>'El formato de :attribute no es valido'
+        'integer'=>'El formato de :attribute no es valido',
+        'string'=> 'El formato de :attribute no es valido'
     ];
 
     public function index()

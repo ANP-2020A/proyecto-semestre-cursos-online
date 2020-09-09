@@ -18,6 +18,8 @@ class Content extends JsonResource
             'id' => $this->id,
             'Description' => $this->description,
             'Level_id' => "/api/levels/".$this->level_id,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         ];
     }
 }

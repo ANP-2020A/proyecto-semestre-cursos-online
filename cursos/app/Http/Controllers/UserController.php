@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\UserCollection;
+use App\Http\Resources\User as UserResource;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -79,5 +80,10 @@ class UserController extends Controller
     public function index()
     {
         return new UserCollection( User::all());
+    }
+
+    public function show(User $user)
+    {
+        return response()->json(new UserResource($user),200);
     }
 }

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Course;
 use App\Register;
 use App\Http\Resources\RegisterCollection;
-use App\Http\Resources\Register as RegisterResource;
+use App\Http\Resources\Register as RegisterResources;
 use Illuminate\Http\Request;
 
 class RegisterController extends Controller
@@ -21,8 +22,14 @@ class RegisterController extends Controller
 
     public function show(Register $register)
     {
-        return  response()->json(new RegisterResource($register),200);
+        return  response()->json(new RegisterResources($register),200);
     }
+
+    /*public function ind(Course $course)
+    {
+        $registers = $course->register;
+        return response()->json(RegisterResources::collection($registers),200);
+    }*/
 
     public function store(Request $request)
     {

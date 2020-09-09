@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Record;
 use App\SelectAnswer;
 use App\Http\Resources\SelectAnswerCollection;
 use App\Http\Resources\SelectAnswer as SelectAnswerResource;
@@ -19,7 +20,8 @@ class SelectAnswerController extends Controller
     }
     public function store(Request $request)
     {
-        return SelectAnswer::create($request->all());
+        $record = Record::create($request->all());
+        return response()->json($record,201);
     }
     public function update(Request $request, $id)
     {

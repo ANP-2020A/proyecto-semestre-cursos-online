@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Answer;
 
+use App\Question;
 use Illuminate\Http\Request;
-use App\Http\Resources\Answer as AnswerResource;
+use App\Http\Resources\Answer as AnswerResources;
 use App\Http\Resources\AnswerCollection;
 
 class AnswerController extends Controller
@@ -14,6 +15,7 @@ class AnswerController extends Controller
         'required'=>'El campo :attribute es obligatorio.',
         'unique'=>'La :attribute ya existe en las respuestas',
         'integer'=>'El formato de :attribute no es valido',
+        'string'=> 'El formato de :attribute no es valido'
         //'exists'=>'El campo :attribute que ingreso no existe en la base de datos'
     ];
 
@@ -21,9 +23,16 @@ class AnswerController extends Controller
     {
         return new AnswerCollection( Answer::all());
     }
+
+    public function ind(Question $question)
+    {
+        $answers = $question->answer;
+        return response()->json(AnswerResources::collection($answers),200);
+    }
+
     public function show( Answer $answer)
     {
-        return  response()->json(new AnswerResource($answer),200);
+        return  response()->json(new AnswerResources($answer),200);
     }
     public function store(Request $request)
     {
@@ -33,23 +42,24 @@ class AnswerController extends Controller
             //'question_id'=>'required|exists:questions,id'
         ],self::$messages);
 
-        return Answer::create($request->all());
+        $answer = Answer::create($request->all());
+        return response()->json($answer,201);
     }
     public function update(Request $request,Answer $answer)
     {
 
         $request->validate([
-            'description' => 'required|unique:questions,descrption,'.$answer->id.'|string|max:255',
+            'description' => 'required|unique:questions,description,'.$answer->id.'|string|max:255',
             'correct'=>'required|integer',
             //'question_id'=>'required|exists:questions,id'
         ],self::$messages);
 
         $answer->update($request->all());
-        return $answer;
+        return response()->json($answer,200);
     }
     public function delete(Request $request,Answer $answer)
     {
         $answer->delete();
-        return 204;
+        return response()->json(null,204);
     }
 }
