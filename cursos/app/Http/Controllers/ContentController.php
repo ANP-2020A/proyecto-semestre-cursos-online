@@ -1,15 +1,17 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Level;
 use App\Content;
-use Illuminate\Http\Request;
-use App\Http\Resources\Content as ContentResource;
+use App\Http\Resources\Content as ContentResources;
 use App\Http\Resources\ContentCollection;
+use Illuminate\Http\Request;
 
 class ContentController extends Controller
 {
     private static $messages = [
         'required'=>'El campo :attribute es obligatorio.',
+        'string'=> 'El formato de :attribute no es valido'
         //'exists'=>'El campo :attribute que ingreso no existe en la base de datos'
     ];
 
@@ -18,9 +20,23 @@ class ContentController extends Controller
         return new ContentCollection(Content::paginate(20));
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @param Level $level
+     * @return \Illuminate\Http\JsonResponse
+     */
+
+    public function ind(Level $level)
+    {
+        $contents = $level->content;
+        return response()->json(ContentResources::collection($contents),200);
+    }
+
+
     public function show(Content $content)
     {
-        return response()->json(new ContentResource($content),200);
+        return response()->json(new ContentResources($content),200);
     }
 
     public function store(Request $request)

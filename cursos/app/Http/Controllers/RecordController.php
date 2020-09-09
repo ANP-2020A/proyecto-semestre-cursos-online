@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class RecordController extends Controller
 {
+    private static $messages = [
+        'required'=>'El campo :attribute es obligatorio.',
+        'string'=> 'El formato de :attribute no es valido'
+    ];
+
     public function index()
     {
         return new RecordCollection(Record::all());
@@ -20,12 +25,22 @@ class RecordController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'score'=> 'required|integer',
+            'comment'=> 'string|max:255'
+        ],self::$messages);
+
         $record = Record::create($request->all());
         return response()->json($record, 201);
     }
 
     public function update(Request $request, Record $record)
     {
+        $request->validate([
+            'score'=> 'required|integer',
+            'comment'=> 'string|max:255'
+        ],self::$messages);
+
         $record ->update($request->all());
         return response()->json($record, 200);
     }

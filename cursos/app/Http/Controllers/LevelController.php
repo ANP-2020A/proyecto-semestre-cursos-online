@@ -13,7 +13,8 @@ class LevelController extends Controller
         'required'=>'El campo :attribute es obligatorio.',
         'unique'=>'El :attribute ya existe en este curso',
         'integer'=>'El formato de :attribute no es valido',
-        'exists'=>'El campo :attribute que ingreso no existe en la base de datos'
+        'exists'=>'El campo :attribute que ingreso no existe en la base de datos',
+        'string'=> 'El formato de :attribute no es valido'
     ];
 
     public function index()
