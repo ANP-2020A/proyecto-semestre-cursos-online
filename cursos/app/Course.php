@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 class Course extends Model
 {
-    protected $fillable = ['name', 'description', 'type', 'date_start','num_level'];
+    protected $fillable = ['name', 'description', 'type', 'date_start','num_level', 'image'];
     /*Relacion de uno a muchos, un curso tiene varios niveles*/
     public function level()
     {
