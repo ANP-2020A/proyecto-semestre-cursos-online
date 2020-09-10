@@ -22,6 +22,7 @@ class Course extends JsonResource
             'date_start' => $this->date_start,
             'num_level' => $this->num_level,
             'user_id' => "/api/users/".$this->user_id,
+            'image' => $this->image,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

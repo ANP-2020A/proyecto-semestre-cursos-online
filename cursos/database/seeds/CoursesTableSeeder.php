@@ -37,6 +37,7 @@ class CoursesTableSeeder extends Seeder
                         'type' => $faker->word,
                         'date_start' => $faker->date('Y-m-d','now'),
                         'num_level' => 5,
+                        'image' => $faker->imageUrl(400,300, null, false)
                     ]);
                 }
             }

@@ -67,19 +67,19 @@ Route::group(['middleware' => ['jwt.verify']], function() {
 
     Route::post('courses', 'CourseController@store');
     Route::put('courses/{course}', 'CourseController@update');
-    Route::delete('courses/course}', 'CourseController@delete');
+    Route::delete('courses/{course}', 'CourseController@delete');
     //Nivel
     Route::get('levels', 'LevelController@index');
     Route::get('levels/{level}', 'LevelController@show');
     Route::post('levels', 'LevelController@store');
     Route::put('levels/{level}', 'LevelController@update');
-    Route::delete('levels/level}', 'LevelController@delete');
+    Route::delete('levels/{level}', 'LevelController@delete');
     //Contenido
     Route::get('contents', 'ContentController@index');
     Route::get('levels/{level}/contents', 'ContentController@ind');
     Route::post('contents', 'ContentController@store');
     Route::put('contents/{content}', 'ContentController@update');
-    Route::delete('contents/content}', 'ContentController@delete');
+    Route::delete('contents/{content}', 'ContentController@delete');
 
     //Pruebas para visualizar usuarios
     Route::get('users', 'UserController@index');
