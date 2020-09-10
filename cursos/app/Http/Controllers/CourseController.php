@@ -20,6 +20,7 @@ class CourseController extends Controller
 
     public function index()
     {
+        //$this->authorize('viewAny', Course::class);
         return new CourseCollection(Course::all());
     }
 
@@ -37,12 +38,13 @@ class CourseController extends Controller
 
     public function show(Course $course)
     {
-        return response()->json(new CourseResources($course));
+        //$this->authorize('view', $course);
+        return response()->json(new CourseResources($course),200);
     }
 
     public function store(Request $request)
     {
-
+        $this->authorize('create', Course::class);
         $request->validate([
             'name' => 'required|string|unique:courses|max:255',
             'description' => 'required',
@@ -58,7 +60,7 @@ class CourseController extends Controller
         $course = new Course($request->all());
         $path = $request->image->store('public/courses');
 
-        $course->image= $path;
+        $course->image = $path;
         $course->save();
 
         return response()->json(new CourseResources($course), 201);
@@ -66,6 +68,7 @@ class CourseController extends Controller
 
     public function update(Request $request, Course $course)
     {
+        $this->authorize('update', $course);
         $request->validate([
             'name' => 'required|string|unique:courses,name,' . $course->id . '|max:255',
             'description' => 'required',
@@ -81,6 +84,7 @@ class CourseController extends Controller
 
     public function delete(Request $request, Course $course)
     {
+        $this->authorize('delete', $course);
         $course->delete();
         return response()->json(null, 204);
     }
