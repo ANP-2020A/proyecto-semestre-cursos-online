@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Level;
 use App\Question;
 use App\Http\Resources\Question as QuestionResources;
@@ -20,6 +19,7 @@ class QuestionController extends Controller
 
     public function index()
     {
+        $this->authorize('viewAny', Question::class);
         return new QuestionCollection(Question::all());
     }
 
@@ -38,11 +38,13 @@ class QuestionController extends Controller
 
     public function show(Question $question)
     {
+        $this->authorize('view', $question);
         return  response()->json(new QuestionResources($question),200);
     }
 
     public function store(Request $request)
     {
+        $this->authorize('create', Question::class);
         $request->validate([
             'description' => 'required|string|unique:questions|max:255',
             'value' => 'required|integer',
@@ -50,12 +52,12 @@ class QuestionController extends Controller
         ],self::$messages);
 
         $question = Question::create($request->all());
-
-        return response()->json($question, 201);
+        return response()->json(new QuestionResources($question), 201);
     }
 
     public function update(Request $request, Question $question)
     {
+        $this->authorize('update', $question);
         $request->validate([
             'description' => 'required|string|unique:questions,description'.$question->id.'|max:255',
             'value' => 'required|integer',
@@ -68,6 +70,7 @@ class QuestionController extends Controller
 
     public function delete(Request $request, Question $question)
     {
+        $this->authorize('delete', $question);
         $question->delete();
         return response()->json(null, 204);
     }

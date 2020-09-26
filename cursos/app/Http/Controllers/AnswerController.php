@@ -21,6 +21,7 @@ class AnswerController extends Controller
 
     public function index()
     {
+        $this->authorize('viewAny', Answer::class);
         return new AnswerCollection( Answer::all());
     }
 
@@ -32,10 +33,12 @@ class AnswerController extends Controller
 
     public function show( Answer $answer)
     {
+        $this->authorize('view', $answer);
         return  response()->json(new AnswerResources($answer),200);
     }
     public function store(Request $request)
     {
+        $this->authorize('create', Answer::class);
         $request->validate([
             'description' => 'required|unique:questions|string|max:255',
             'correct'=>'required|integer',
@@ -43,11 +46,12 @@ class AnswerController extends Controller
         ],self::$messages);
 
         $answer = Answer::create($request->all());
-        return response()->json($answer,201);
+        return response()->json(new AnswerResources($answer),201);
     }
+
     public function update(Request $request,Answer $answer)
     {
-
+        $this->authorize('update', $answer);
         $request->validate([
             'description' => 'required|unique:questions,description,'.$answer->id.'|string|max:255',
             'correct'=>'required|integer',
@@ -59,6 +63,7 @@ class AnswerController extends Controller
     }
     public function delete(Request $request,Answer $answer)
     {
+        $this->authorize('delete', $answer);
         $answer->delete();
         return response()->json(null,204);
     }

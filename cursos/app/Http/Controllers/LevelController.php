@@ -19,11 +19,13 @@ class LevelController extends Controller
 
     public function index()
     {
+        $this->authorize('viewAny', Level::class);
         return new LevelCollection(Level::all());
     }
 
     public function show(Level $level)
     {
+        $this->authorize('view', $level);
         return response()->json(new LevelResources($level),200);
     }
     /**
@@ -40,6 +42,7 @@ class LevelController extends Controller
 
     public function store(Request $request)
     {
+        $this->authorize('create', Level::class);
         $request->validate([
             'title' => 'required|string|unique:levels|max:255',
             'number' => 'required|integer',
@@ -48,11 +51,12 @@ class LevelController extends Controller
         ],self::$messages);
 
         $level = Level::create($request->all());
-        return response()->json($level, 201);
+        return response()->json(new LevelResources($level), 201);
     }
 
     public function update(Request $request, Level $level)
     {
+        $this->authorize('update', $level);
         $request->validate([
             'title' => 'required|string|unique:levels,title,'.$level->id.'|max:255',
             'number' => 'required|integer',
@@ -66,6 +70,7 @@ class LevelController extends Controller
 
     public function delete(Request $request, Level $level)
     {
+        $this->authorize('delete', $level);
         $level->delete();
         return response()->json(null, 204);
     }
