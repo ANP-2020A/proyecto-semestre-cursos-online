@@ -9,8 +9,8 @@ use Illuminate\Http\Request;
 class RecordController extends Controller
 {
     private static $messages = [
-        'required'=>'El campo :attribute es obligatorio.',
-        'string'=> 'El formato de :attribute no es valido'
+        //'required'=>'El campo :attribute es obligatorio.',
+        //'string'=> 'El formato de :attribute no es valido'
     ];
 
     public function index()
@@ -26,7 +26,7 @@ class RecordController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'score'=> 'required|integer',
+            'score'=> 'integer',
             'comment'=> 'string|max:255'
         ],self::$messages);
 

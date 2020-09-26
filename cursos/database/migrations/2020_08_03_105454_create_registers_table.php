@@ -15,8 +15,8 @@ class CreateRegistersTable extends Migration
     {
         Schema::create('registers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('progress'); /**Porcentaje de avance del curso (0-255)**/
-            $table->integer('score');
+            $table->integer('progress')->default(0); /**Porcentaje de avance del curso (0-255)**/
+            $table->integer('score')->nullable();
             $table->timestamps();
         });
     }

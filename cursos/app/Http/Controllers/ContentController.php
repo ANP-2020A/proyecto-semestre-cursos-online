@@ -17,6 +17,7 @@ class ContentController extends Controller
 
     public function index()
     {
+        $this->authorize('viewAny', Content::class);
         return new ContentCollection(Content::paginate(20));
     }
 
@@ -36,22 +37,25 @@ class ContentController extends Controller
 
     public function show(Content $content)
     {
+        $this->authorize('view', $content);
         return response()->json(new ContentResources($content),200);
     }
 
     public function store(Request $request)
     {
+        $this->authorize('create', Content::class);
         $request->validate([
             'description' => 'required|string|max:255',
           //  'level_id'=>'required|exists:levels,id'
         ],self::$messages);
 
         $content = Content::create($request->all());
-        return response()->json($content, 201);
+        return response()->json(new ContentResources($content), 201);
     }
 
     public function update(Request $request, Content $content)
     {
+        $this->authorize('update', $content);
         $request->validate([
             'description' => 'required|string|max:255',
             //'level_id'=>'required|exists:levels,id'
@@ -63,6 +67,7 @@ class ContentController extends Controller
 
     public function delete(Request $request, Content $content)
     {
+        $this->authorize('delete', $content);
         $content->delete();
         return response()->json(null, 204);
     }
