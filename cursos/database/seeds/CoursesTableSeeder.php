@@ -34,7 +34,7 @@ class CoursesTableSeeder extends Seeder
                     Course::create([
                         'name' => $faker->sentence,
                         'description' => $faker->paragraph,
-                        'type' => $faker->randomElement(['programacion','redes']),
+                        'type' => $faker->randomElement(['programacion','redes','bdd', 'seguridad', 'so', 'algoritmos', 'arquitectura']),
                         'date_start' => $faker->date('Y-m-d','now'),
                         'num_level' => 5,
                         'image' => $faker->imageUrl(400,300, null, false)
